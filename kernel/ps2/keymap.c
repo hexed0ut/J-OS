@@ -31,13 +31,3 @@ struct KeyMap ps2_us_qwerty[] = {
     {0x39, ' '}     // space
 };
 
-char map(char inp){
-    int length = sizeof(ps2_us_qwerty)/sizeof(ps2_us_qwerty[0]);
-    for (int i=0; i<length; i++){
-        if (inp == ps2_us_qwerty[i].scan_code){
-            return ps2_us_qwerty[i].key;
-        }
-    }
-    return '\0';
-}
-
