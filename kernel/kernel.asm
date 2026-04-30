@@ -4,9 +4,9 @@
 section .text
 global start
 start:
-  call kernel_main
-  jmp hang
+    call kernel_main
+    jmp hang
 
 hang:
-  hlt
-  jmp hang
+    hlt
+    jmp hang
