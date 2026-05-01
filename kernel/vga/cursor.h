@@ -1,5 +1,10 @@
+#ifndef CURSOR_H
+#define CURSOR_H
+
+#include "../global.h"
+
 void move_cursor(int row, int col) {
-    int pos = (row*80) + col;
+    int pos = (row*VGA_WIDTH) + col;
     int hsb = pos/256;
     int lsb = pos%256;
 
@@ -52,3 +57,5 @@ void shift_cursor(int delta) {
         outb(0x3D5, lsb);
     }
 }
+
+#endif

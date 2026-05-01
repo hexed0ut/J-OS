@@ -1,3 +1,6 @@
+#ifndef KEYMAP_H
+#define KEYMAP_H
+
 enum KeyType {
     PRINTABLE,
     MODIFIER,
@@ -74,3 +77,4 @@ struct KeyMap ps2_us_qwerty[] = {
     // prev track, next track, num enter, r ctrl, play, stop, num '/', r alt, arrow keys, pgup, pgdn, home, ins, dlt, prtsc
 };
 
+#endif

@@ -1,3 +1,6 @@
+#ifndef ASM_UTILS_H
+#define ASM_UTILS_H
+
 void outb(int port, char value) {
     // Outputs a value to the I/O memory
     asm volatile("outb %0, %1" : :"a"(value), "Nd"(port));
@@ -8,3 +11,5 @@ char inb(int port) {
     asm volatile("inb %1, %0" : "=a"(ret) : "Nd"(port));
     return ret;
 }
+
+#endif
