@@ -2,6 +2,7 @@ BUILD_PATH='../build'
 BOOT_PATH='../bootloader'
 KERNEL_PATH='../kernel'
 
+rm -rf $BUILD_PATH
 mkdir $BUILD_PATH
 
 nasm -f bin $BOOT_PATH/boot.asm -o $BUILD_PATH/boot.bin
