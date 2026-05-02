@@ -1,7 +1,11 @@
 #ifndef KEYMAP_H
 #define KEYMAP_H
 
+#include "scan_code_set_1.h"
+#define NO_DISPLAY 0
+
 enum KeyType {
+    UNDEFINED,
     PRINTABLE,
     MODIFIER,
     LOCK,
@@ -11,71 +15,81 @@ enum KeyType {
     MULTIKEY
 };
 
-struct KeyMap {
-    unsigned char scan_code;
+struct KeyMapValue {
     unsigned char key;
     enum KeyType type;
 };
 
-struct KeyMap ps2_us_qwerty[] = {
-    {0x02,  '1', PRINTABLE}, {0x03, '2', PRINTABLE}, {0x04,  '3', PRINTABLE}, {0x05, '4', PRINTABLE},
-    {0x06,  '5', PRINTABLE}, {0x07, '6', PRINTABLE}, {0x08,  '7', PRINTABLE}, {0x09, '8', PRINTABLE},
-    {0x0A,  '9', PRINTABLE}, {0x0B, '0', PRINTABLE}, {0x0C,  '-', PRINTABLE}, {0x0D, '=', PRINTABLE},
-    {0x10,  'q', PRINTABLE}, {0x11, 'w', PRINTABLE}, {0x12,  'e', PRINTABLE}, {0x13, 'r', PRINTABLE},
-    {0x14,  't', PRINTABLE}, {0x15, 'y', PRINTABLE}, {0x16,  'u', PRINTABLE}, {0x17, 'i', PRINTABLE},
-    {0x18,  'o', PRINTABLE}, {0x19, 'p', PRINTABLE}, {0x1A,  '[', PRINTABLE}, {0x1B, ']', PRINTABLE},
-    {0x1E,  'a', PRINTABLE}, {0x1F, 's', PRINTABLE}, {0x20,  'd', PRINTABLE}, {0x21, 'f', PRINTABLE},
-    {0x22,  'g', PRINTABLE}, {0x23, 'h', PRINTABLE}, {0x24,  'j', PRINTABLE}, {0x25, 'k', PRINTABLE},
-    {0x26,  'l', PRINTABLE}, {0x27, ';', PRINTABLE}, {0x28, '\'', PRINTABLE}, {0x29, '`', PRINTABLE}, 
-    {0x2B, '\\', PRINTABLE}, {0x33, ',', PRINTABLE}, {0x34,  '.', PRINTABLE}, {0x35, '/', PRINTABLE},
-    {0x2C,  'z', PRINTABLE}, {0x2D, 'x', PRINTABLE}, {0x2E,  'c', PRINTABLE}, {0x2F, 'v', PRINTABLE},
-    {0x30,  'b', PRINTABLE}, {0x31, 'n', PRINTABLE}, {0x32,  'm', PRINTABLE}, {0x39, ' ', PRINTABLE},
-    
-    {0x38, 0, MODIFIER},    // left alt
-    {0x2A, 0, MODIFIER},    // left shift
-    {0xAA, 0, MODIFIER},    // left shift released
-    {0x36, 0, MODIFIER},    // right shift
-    {0xB6, 0, MODIFIER},    // right shift released
-    {0x1D, 0, MODIFIER},    // left control
+const struct KeyMapValue ps2_us_qwerty[256] = {
+    [SC_1]              = { '1', PRINTABLE }, [SC_2]              = { '2', PRINTABLE }, [SC_3]              = { '3', PRINTABLE },
+    [SC_4]              = { '4', PRINTABLE }, [SC_5]              = { '5', PRINTABLE }, [SC_6]              = { '6', PRINTABLE },
+    [SC_7]              = { '7', PRINTABLE }, [SC_8]              = { '8', PRINTABLE }, [SC_9]              = { '9', PRINTABLE },
+    [SC_0]              = { '0', PRINTABLE }, [SC_MINUS]          = { '-', PRINTABLE }, [SC_EQUAL]          = { '=', PRINTABLE },
 
-    {0x45, 0, LOCK},    // numlock
-    {0x3A, 0, LOCK},    // capslock
-    {0x46, 0, LOCK},    // scroll-lock
+    [SC_Q]              = { 'q', PRINTABLE }, [SC_W]              = { 'w', PRINTABLE }, [SC_E]              = { 'e', PRINTABLE },
+    [SC_R]              = { 'r', PRINTABLE }, [SC_T]              = { 't', PRINTABLE }, [SC_Y]              = { 'y', PRINTABLE },
+    [SC_U]              = { 'u', PRINTABLE }, [SC_I]              = { 'i', PRINTABLE }, [SC_O]              = { 'o', PRINTABLE },
+    [SC_P]              = { 'p', PRINTABLE }, [SC_LBRACKET]       = { '[', PRINTABLE }, [SC_RBRACKET]       = { ']', PRINTABLE },
 
-    {0x01, 0, SPECIAL},    // ESC
-    {0x0F, 0, SPECIAL},    // tab
-    {0x1C, 0, SPECIAL},    // enter
-    {0x0E, 0, SPECIAL},    // backspace
+    [SC_A]              = { 'a', PRINTABLE }, [SC_S]              = { 's', PRINTABLE }, [SC_D]              = { 'd', PRINTABLE },
+    [SC_F]              = { 'f', PRINTABLE }, [SC_G]              = { 'g', PRINTABLE }, [SC_H]              = { 'h', PRINTABLE },
+    [SC_J]              = { 'j', PRINTABLE }, [SC_K]              = { 'k', PRINTABLE }, [SC_L]              = { 'l', PRINTABLE },
+    [SC_SEMICOLON]      = { ';', PRINTABLE }, [SC_APOSTROPHE]     = {'\'', PRINTABLE }, [SC_GRAVE]          = { '`', PRINTABLE },
 
-    {0x3B, 0, FUNCTION},    // F1
-    {0x3C, 0, FUNCTION},    // F2
-    {0x3D, 0, FUNCTION},    // F3
-    {0x3E, 0, FUNCTION},    // F4
-    {0x3F, 0, FUNCTION},    // F5
-    {0x40, 0, FUNCTION},    // F6
-    {0x41, 0, FUNCTION},    // F7
-    {0x42, 0, FUNCTION},    // F8
-    {0x43, 0, FUNCTION},    // F9
-    {0x44, 0, FUNCTION},    // F10
-    {0x57, 0, FUNCTION},    // F11
-    {0x58, 0, FUNCTION},    // F12
+    [SC_Z]              = { 'z', PRINTABLE }, [SC_X]              = { 'x', PRINTABLE }, [SC_C]              = { 'c', PRINTABLE },
+    [SC_V]              = { 'v', PRINTABLE }, [SC_B]              = { 'b', PRINTABLE }, [SC_N]              = { 'n', PRINTABLE },
+    [SC_M]              = { 'm', PRINTABLE }, [SC_SPACE]          = { ' ', PRINTABLE },
 
-    {0x37, '*', NUMPAD},    // numpad '*'
-    {0x47, '7', NUMPAD},    // numpad '7'
-    {0x48, '8', NUMPAD},    // numpad '8'
-    {0x49, '9', NUMPAD},    // numpad '9'
-    {0x4A, '-', NUMPAD},    // numpad '-'
-    {0x4B, '4', NUMPAD},    // numpad '4'
-    {0x4C, '5', NUMPAD},    // numpad '5'
-    {0x4D, '6', NUMPAD},    // numpad '6'
-    {0x4E, '+', NUMPAD},    // numpad '+'
-    {0x4F, '1', NUMPAD},    // numpad '1'
-    {0x50, '2', NUMPAD},    // numpad '2'
-    {0x51, '3', NUMPAD},    // numpad '3'
-    {0x52, '0', NUMPAD},    // numpad '0'
-    {0x53, '.', NUMPAD},    // numpad '.'
+    [SC_BACKSLASH]      = { '\\', PRINTABLE },
+    [SC_COMMA]          = { ',',  PRINTABLE },
+    [SC_DOT]            = { '.',  PRINTABLE },
+    [SC_SLASH]          = { '/',  PRINTABLE },
 
-    {0xE0, 0, MULTIKEY}    // https://wiki.osdev.org/PS/2_Keyboard#Scan_Code_Set_1
+    [SC_LALT_PRESS]     = { NO_DISPLAY, MODIFIER },
+    [SC_LSHIFT_PRESS]   = { NO_DISPLAY, MODIFIER },
+    [SC_LSHIFT_RELEASE] = { NO_DISPLAY, MODIFIER },
+    [SC_RSHIFT_PRESS]   = { NO_DISPLAY, MODIFIER },
+    [SC_RSHIFT_RELEASE] = { NO_DISPLAY, MODIFIER },
+    [SC_LCTRL_PRESS]    = { NO_DISPLAY, MODIFIER },
+
+    [SC_NUMLOCK]        = { NO_DISPLAY, LOCK },
+    [SC_CAPSLOCK]       = { NO_DISPLAY, LOCK },
+    [SC_SCROLLLOCK]     = { NO_DISPLAY, LOCK },
+
+    [SC_ESC]            = { NO_DISPLAY, SPECIAL },
+    [SC_TAB]            = { NO_DISPLAY, SPECIAL },
+    [SC_ENTER]          = { NO_DISPLAY, SPECIAL },
+    [SC_BACKSPACE]      = { NO_DISPLAY, SPECIAL },
+
+    [SC_F1]             = { NO_DISPLAY, FUNCTION },
+    [SC_F2]             = { NO_DISPLAY, FUNCTION },
+    [SC_F3]             = { NO_DISPLAY, FUNCTION },
+    [SC_F4]             = { NO_DISPLAY, FUNCTION },
+    [SC_F5]             = { NO_DISPLAY, FUNCTION },
+    [SC_F6]             = { NO_DISPLAY, FUNCTION },
+    [SC_F7]             = { NO_DISPLAY, FUNCTION },
+    [SC_F8]             = { NO_DISPLAY, FUNCTION },
+    [SC_F9]             = { NO_DISPLAY, FUNCTION },
+    [SC_F10]            = { NO_DISPLAY, FUNCTION },
+    [SC_F11]            = { NO_DISPLAY, FUNCTION },
+    [SC_F12]            = { NO_DISPLAY, FUNCTION },
+
+    [SC_NUMPAD_STAR]    = { '*', NUMPAD },
+    [SC_NUMPAD_7]       = { '7', NUMPAD },
+    [SC_NUMPAD_8]       = { '8', NUMPAD },
+    [SC_NUMPAD_9]       = { '9', NUMPAD },
+    [SC_NUMPAD_MINUS]   = { '-', NUMPAD },
+    [SC_NUMPAD_4]       = { '4', NUMPAD },
+    [SC_NUMPAD_5]       = { '5', NUMPAD },
+    [SC_NUMPAD_6]       = { '6', NUMPAD },
+    [SC_NUMPAD_PLUS]    = { '+', NUMPAD },
+    [SC_NUMPAD_1]       = { '1', NUMPAD },
+    [SC_NUMPAD_2]       = { '2', NUMPAD },
+    [SC_NUMPAD_3]       = { '3', NUMPAD },
+    [SC_NUMPAD_0]       = { '0', NUMPAD },
+    [SC_NUMPAD_DOT]     = { '.', NUMPAD },
+
+    [SC_EXTENDED]       = { NO_DISPLAY, MULTIKEY }, // https://wiki.osdev.org/PS/2_Keyboard#Scan_Code_Set_1
     // prev track, next track, num enter, r ctrl, play, stop, num '/', r alt, arrow keys, pgup, pgdn, home, ins, dlt, prtsc
 };
 
