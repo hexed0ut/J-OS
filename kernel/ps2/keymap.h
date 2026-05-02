@@ -4,7 +4,8 @@
 #include "scan_code_set_1.h"
 #define NO_DISPLAY 0
 
-enum KeyType {
+enum KeyType
+{
     UNDEFINED,
     PRINTABLE,
     MODIFIER,
@@ -15,7 +16,8 @@ enum KeyType {
     MULTIKEY
 };
 
-struct KeyMapValue {
+struct KeyMapValue
+{
     unsigned char key;
     enum KeyType type;
 };

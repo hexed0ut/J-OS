@@ -2,7 +2,6 @@
 #define SCAN_CODE_SET_1_H
 
 // Printables
-
 #define SC_GRAVE          0x29
 #define SC_1              0x02
 #define SC_2              0x03
