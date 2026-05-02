@@ -32,10 +32,8 @@ char resolve_ps2_key(char inp) {
 char await_ps2_key() {
     while (1) {
         if (is_keypress()) {
-            char inp = inb(0x60);
-            if (resolve_ps2_key(inp) != 0) {
-                return resolve_ps2_key(inp);
-            }
+            char inp = inb(0x60); 
+            return resolve_ps2_key(inp);
         }
     }
 }
