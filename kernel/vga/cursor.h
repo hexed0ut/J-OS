@@ -1,7 +1,7 @@
 #ifndef CURSOR_H
 #define CURSOR_H
 
-#include "../global.h"
+#include "global.h"
 
 void move_cursor( int row, int col )
 {

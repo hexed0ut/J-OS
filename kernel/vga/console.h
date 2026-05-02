@@ -2,8 +2,8 @@
 #define CONSOLE_H
 
 #include "cursor.h"
-#include "../ps2/driver.h"
-#include "../global.h"
+#include "ps2/driver.h"
+#include "global.h"
 
 void clear_vga_buffer()
 {

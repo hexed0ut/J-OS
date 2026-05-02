@@ -1,0 +1,16 @@
+{
+  "configurations": [
+    {
+      "name": "baremetal",
+      "compilerPath": "~/cross/bin/i686-elf-gcc",
+      "cStandard": "c17",
+      "includePath": [
+        "~/cross/lib/gcc/i686-elf/15.1.0/include",
+        "~/cross/lib/gcc/i686-elf/15.1.0/include-fixed",
+        "~/cross/i686-elf/include",
+        "${workspaceFolder}/kernel"
+      ]
+    }
+  ],
+  "version": 4
+}
