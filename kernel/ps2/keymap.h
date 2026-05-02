@@ -12,8 +12,8 @@ enum KeyType {
 };
 
 struct KeyMap {
-    char scan_code;
-    char key;
+    unsigned char scan_code;
+    unsigned char key;
     enum KeyType type;
 };
 
@@ -31,32 +31,34 @@ struct KeyMap ps2_us_qwerty[] = {
     {0x2C,  'z', PRINTABLE}, {0x2D, 'x', PRINTABLE}, {0x2E,  'c', PRINTABLE}, {0x2F, 'v', PRINTABLE},
     {0x30,  'b', PRINTABLE}, {0x31, 'n', PRINTABLE}, {0x32,  'm', PRINTABLE}, {0x39, ' ', PRINTABLE},
     
-    {0x38, '\0', MODIFIER},    // left alt
-    {0x2A, '\0', MODIFIER},    // left shift
-    {0x36, '\0', MODIFIER},    // right shift
-    {0x1D, '\0', MODIFIER},    // left control
+    {0x38, 0, MODIFIER},    // left alt
+    {0x2A, 0, MODIFIER},    // left shift
+    {0xAA, 0, MODIFIER},    // left shift released
+    {0x36, 0, MODIFIER},    // right shift
+    {0xB6, 0, MODIFIER},    // right shift released
+    {0x1D, 0, MODIFIER},    // left control
 
-    {0x45, '\0', LOCK},    // numlock
-    {0x3A, '\0', LOCK},    // capslock
-    {0x46, '\0', LOCK},    // scroll-lock
+    {0x45, 0, LOCK},    // numlock
+    {0x3A, 0, LOCK},    // capslock
+    {0x46, 0, LOCK},    // scroll-lock
 
-    {0x01, '\0', SPECIAL},    // ESC
-    {0x0F, '\0', SPECIAL},    // tab
-    {0x1C, '\0', SPECIAL},    // enter
-    {0x0E, '\0', SPECIAL},    // backspace
+    {0x01, 0, SPECIAL},    // ESC
+    {0x0F, 0, SPECIAL},    // tab
+    {0x1C, 0, SPECIAL},    // enter
+    {0x0E, 0, SPECIAL},    // backspace
 
-    {0x3B, '\0', FUNCTION},    // F1
-    {0x3C, '\0', FUNCTION},    // F2
-    {0x3D, '\0', FUNCTION},    // F3
-    {0x3E, '\0', FUNCTION},    // F4
-    {0x3F, '\0', FUNCTION},    // F5
-    {0x40, '\0', FUNCTION},    // F6
-    {0x41, '\0', FUNCTION},    // F7
-    {0x42, '\0', FUNCTION},    // F8
-    {0x43, '\0', FUNCTION},    // F9
-    {0x44, '\0', FUNCTION},    // F10
-    {0x57, '\0', FUNCTION},    // F11
-    {0x58, '\0', FUNCTION},    // F12
+    {0x3B, 0, FUNCTION},    // F1
+    {0x3C, 0, FUNCTION},    // F2
+    {0x3D, 0, FUNCTION},    // F3
+    {0x3E, 0, FUNCTION},    // F4
+    {0x3F, 0, FUNCTION},    // F5
+    {0x40, 0, FUNCTION},    // F6
+    {0x41, 0, FUNCTION},    // F7
+    {0x42, 0, FUNCTION},    // F8
+    {0x43, 0, FUNCTION},    // F9
+    {0x44, 0, FUNCTION},    // F10
+    {0x57, 0, FUNCTION},    // F11
+    {0x58, 0, FUNCTION},    // F12
 
     {0x37, '*', NUMPAD},    // numpad '*'
     {0x47, '7', NUMPAD},    // numpad '7'
@@ -73,7 +75,7 @@ struct KeyMap ps2_us_qwerty[] = {
     {0x52, '0', NUMPAD},    // numpad '0'
     {0x53, '.', NUMPAD},    // numpad '.'
 
-    {0xE0, '\0', MULTIKEY}    // https://wiki.osdev.org/PS/2_Keyboard#Scan_Code_Set_1
+    {0xE0, 0, MULTIKEY}    // https://wiki.osdev.org/PS/2_Keyboard#Scan_Code_Set_1
     // prev track, next track, num enter, r ctrl, play, stop, num '/', r alt, arrow keys, pgup, pgdn, home, ins, dlt, prtsc
 };
 
