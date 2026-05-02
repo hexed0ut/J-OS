@@ -5,28 +5,63 @@
 #include "state.c"
 #include "scan_code_set_1.h"
 
+char shift_map[128] = {
+    ['1'] = '!',['2'] = '@',['3'] = '#',['4'] = '$',['5'] = '%',
+    ['6'] = '^',['7'] = '&',['8'] = '*',['9'] = '(',['0'] = ')',
+
+    ['-'] = '_',['='] = '+',['['] = '{',[']'] = '}',['\\'] = '|',
+    [';'] = ':',['\''] = '"',[','] = '<',['.'] = '>',['/'] = '?',['`'] = '~',
+};
+
 unsigned char is_keypress()
 {
-    return inb( 0x64 ) & 1;
+    return (inb( 0x64 ) & 1);
+}
+
+char resolve_caps( unsigned char key )
+{
+    if ( key > 96 && key < 123 )
+    {
+        return key - 32;
+    }
+    else
+    {
+        return key;
+    }
+}
+
+char resolve_shift( unsigned char key )
+{
+    if ( key > 96 && key < 123 )
+    {
+        return resolve_caps( key );
+    }
+    else
+    {
+        return shift_map[key];
+    }
 }
 
 char resolve_ps2_key( unsigned char scan_code )
 {
-    struct KeyMapValue resolved_key = ps2_us_qwerty[scan_code];
 
-    if ( resolved_key.type == PRINTABLE )
+    if ( ps2_us_qwerty[scan_code].type == PRINTABLE )
     {
         if ( SHIFT_ACTIVE )
         {
-            return resolved_key.key - 32;
+            return resolve_shift( ps2_us_qwerty[scan_code].key );
+        }
+        else if ( CAPSLOCK_ACTIVE )
+        {
+            return resolve_caps( ps2_us_qwerty[scan_code].key );
         }
         else
         {
-            return resolved_key.key;
+            return ps2_us_qwerty[scan_code].key;
         }
     }
 
-    else if ( resolved_key.type == MODIFIER )
+    else if ( ps2_us_qwerty[scan_code].type == MODIFIER )
     {
         if ( scan_code == SC_LSHIFT_PRESS || scan_code == SC_RSHIFT_PRESS )
         {
@@ -37,6 +72,15 @@ char resolve_ps2_key( unsigned char scan_code )
             SHIFT_ACTIVE = 0;
         }
     }
+
+    else if ( ps2_us_qwerty[scan_code].type == LOCK )
+    {
+        if ( scan_code == SC_CAPSLOCK )
+        {
+            CAPSLOCK_ACTIVE = !CAPSLOCK_ACTIVE;
+        }
+    }
+
     return 0;
 }
 
