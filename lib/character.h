@@ -15,7 +15,7 @@ bool is_uppercase( char ch )
 
 char to_uppercase( char ch )
 {
-	if ( !is_uppercase( ch ) )
+	if ( is_alpha( ch ) && !is_uppercase( ch ) )
 		return ch - 32;
 
 	return ch;
