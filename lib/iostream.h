@@ -14,7 +14,7 @@ char resolve_shift( unsigned char ch )
 		else return ch;
 	}
 
-  return shift_map[ch];
+	return shift_map[ch];
 }
 
 char resolve_keycode( unsigned char keycode )
@@ -23,14 +23,14 @@ char resolve_keycode( unsigned char keycode )
 
 	if ( val.type == PRINTABLE )
 	{
-	  if ( SHIFT_ACTIVE ) return resolve_shift( val.ascii );
+		if ( SHIFT_ACTIVE ) return resolve_shift( val.ascii );
 
-	if ( CAPSLOCK_ACTIVE ) return to_uppercase( val.ascii );
+		if ( CAPSLOCK_ACTIVE ) return to_uppercase( val.ascii );
 
-	return val.ascii;
-  }
+		return val.ascii;
+	}
 
-  return 0;
+	return 0;
 }
 
 void read_input()
@@ -43,10 +43,10 @@ void read_input()
 		char ch = resolve_keycode( key );
 		if ( !ch ) continue;
 
-	*(vga + pos) = ch;
-	pos = pos + 2;
-	shift_cursor( 1 );
-  }
+		*(vga + pos) = ch;
+		pos = pos + 2;
+		shift_cursor( 1 );
+	}
 }
 
 void read_key_event() { return; }
