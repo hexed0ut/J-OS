@@ -29,6 +29,13 @@ char resolve_keycode( unsigned char keycode )
 		return val.ascii;
 	}
 
+	if ( val.type == NUMPAD )
+	{
+		if ( NUMLOCK_ACTIVE ) return val.ascii;
+
+		return 0;
+	}
+
 	return 0;
 }
 
