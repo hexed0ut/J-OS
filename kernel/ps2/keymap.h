@@ -30,7 +30,7 @@ struct KeyMapValue keycode_ascii[256] = {
     [KEY_Q_PRESSED]              = { 'q', PRINTABLE }, [KEY_W_PRESSED]              = { 'w', PRINTABLE }, [KEY_E_PRESSED]              = { 'e', PRINTABLE },
     [KEY_R_PRESSED]              = { 'r', PRINTABLE }, [KEY_T_PRESSED]              = { 't', PRINTABLE }, [KEY_Y_PRESSED]              = { 'y', PRINTABLE },
     [KEY_U_PRESSED]              = { 'u', PRINTABLE }, [KEY_I_PRESSED]              = { 'i', PRINTABLE }, [KEY_O_PRESSED]              = { 'o', PRINTABLE },
-    [KEY_P_PRESSED]              = { 'p', PRINTABLE }, [KEY_LBRACKET_PRESSED]       = { '[', PRINTABLE }, [KEY_RBRACKET_PRESSED]       = { '_', PRINTABLE },
+    [KEY_P_PRESSED]              = { 'p', PRINTABLE }, [KEY_LBRACKET_PRESSED]       = { '[', PRINTABLE }, [KEY_RBRACKET_PRESSED]       = { ']', PRINTABLE },
 
     [KEY_A_PRESSED]              = { 'a', PRINTABLE }, [KEY_S_PRESSED]              = { 's', PRINTABLE }, [KEY_D_PRESSED]              = { 'd', PRINTABLE },
     [KEY_F_PRESSED]              = { 'f', PRINTABLE }, [KEY_G_PRESSED]              = { 'g', PRINTABLE }, [KEY_H_PRESSED]              = { 'h', PRINTABLE },
