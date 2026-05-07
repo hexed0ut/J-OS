@@ -1,6 +1,7 @@
 #ifndef CURSOR_H
 #define CURSOR_H
 
+#include "asm_utils.h"
 #include "global.h"
 
 void move_cursor( int row, int col )

@@ -1,6 +1,7 @@
-BUILD_PATH='../build'
-BOOT_PATH='../bootloader'
-KERNEL_PATH='../kernel'
+ROOT_PATH='..'
+BUILD_PATH="$ROOT_PATH/build"
+BOOT_PATH="$ROOT_PATH/bootloader"
+KERNEL_PATH="$ROOT_PATH/kernel"
 
 rm -rf $BUILD_PATH
 mkdir $BUILD_PATH
@@ -8,7 +9,7 @@ mkdir $BUILD_PATH
 nasm -f bin $BOOT_PATH/boot.asm -o $BUILD_PATH/boot.bin
 
 nasm -f elf32 $KERNEL_PATH/kernel.asm -o $BUILD_PATH/kernel_asm.o
-i686-elf-gcc -Wno-int-conversion -I$KERNEL_PATH/ -c $KERNEL_PATH/kernel.c -o $BUILD_PATH/kernel_c.o
+i686-elf-gcc -Wno-int-conversion -I$KERNEL_PATH/ -I$ROOT_PATH/lib -c $KERNEL_PATH/kernel.c -o $BUILD_PATH/kernel_c.o
 i686-elf-ld --oformat=binary -T $KERNEL_PATH/linker.ld $BUILD_PATH/kernel_asm.o $BUILD_PATH/kernel_c.o -o $BUILD_PATH/kernel.bin
 
 dd if=$BUILD_PATH/boot.bin of=$BUILD_PATH/bare_os.img count=1 bs=512 conv=notrunc

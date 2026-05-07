@@ -3,7 +3,6 @@
 
 void outb( int port, char value )
 {
-    // Outputs a value to the I/O memory
     asm volatile ("outb %0, %1" : : "a"(value), "Nd"(port));
 }
 

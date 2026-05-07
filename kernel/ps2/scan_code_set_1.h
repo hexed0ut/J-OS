@@ -1,109 +1,167 @@
 #ifndef SCAN_CODE_SET_1_H
 #define SCAN_CODE_SET_1_H
 
-// Printables
-#define SC_GRAVE          0x29
-#define SC_1              0x02
-#define SC_2              0x03
-#define SC_3              0x04
-#define SC_4              0x05
-#define SC_5              0x06
-#define SC_6              0x07
-#define SC_7              0x08
-#define SC_8              0x09
-#define SC_9              0x0A
-#define SC_0              0x0B
-#define SC_MINUS          0x0C
-#define SC_EQUAL          0x0D
+#include "os_keycode.h"
 
-#define SC_Q              0x10
-#define SC_W              0x11
-#define SC_E              0x12
-#define SC_R              0x13
-#define SC_T              0x14
-#define SC_Y              0x15
-#define SC_U              0x16
-#define SC_I              0x17
-#define SC_O              0x18
-#define SC_P              0x19
-#define SC_LBRACKET       0x1A
-#define SC_RBRACKET       0x1B
-#define SC_BACKSLASH      0x2B
+#define SC_EXTENDED 0xE0
 
-#define SC_A              0x1E
-#define SC_S              0x1F
-#define SC_D              0x20
-#define SC_F              0x21
-#define SC_G              0x22
-#define SC_H              0x23
-#define SC_J              0x24
-#define SC_K              0x25
-#define SC_L              0x26
-#define SC_SEMICOLON      0x27
-#define SC_APOSTROPHE     0x28
+unsigned char keycode_map[256] = {
+    // 1–0
+    [0x02] = KEY_1_PRESSED, [0x82] = KEY_1_RELEASED,
+    [0x03] = KEY_2_PRESSED, [0x83] = KEY_2_RELEASED,
+    [0x04] = KEY_3_PRESSED, [0x84] = KEY_3_RELEASED,
+    [0x05] = KEY_4_PRESSED, [0x85] = KEY_4_RELEASED,
+    [0x06] = KEY_5_PRESSED, [0x86] = KEY_5_RELEASED,
+    [0x07] = KEY_6_PRESSED, [0x87] = KEY_6_RELEASED,
+    [0x08] = KEY_7_PRESSED, [0x88] = KEY_7_RELEASED,
+    [0x09] = KEY_8_PRESSED, [0x89] = KEY_8_RELEASED,
+    [0x0A] = KEY_9_PRESSED, [0x8A] = KEY_9_RELEASED,
+    [0x0B] = KEY_0_PRESSED, [0x8B] = KEY_0_RELEASED,
 
-#define SC_Z              0x2C
-#define SC_X              0x2D
-#define SC_C              0x2E
-#define SC_V              0x2F
-#define SC_B              0x30
-#define SC_N              0x31
-#define SC_M              0x32
-#define SC_COMMA          0x33
-#define SC_DOT            0x34
-#define SC_SLASH          0x35
-#define SC_SPACE          0x39
+    // A–Z
+    [0x1E] = KEY_A_PRESSED, [0x9E] = KEY_A_RELEASED,
+    [0x30] = KEY_B_PRESSED, [0xB0] = KEY_B_RELEASED,
+    [0x2E] = KEY_C_PRESSED, [0xAE] = KEY_C_RELEASED,
+    [0x20] = KEY_D_PRESSED, [0xA0] = KEY_D_RELEASED,
+    [0x12] = KEY_E_PRESSED, [0x92] = KEY_E_RELEASED,
+    [0x21] = KEY_F_PRESSED, [0xA1] = KEY_F_RELEASED,
+    [0x22] = KEY_G_PRESSED, [0xA2] = KEY_G_RELEASED,
+    [0x23] = KEY_H_PRESSED, [0xA3] = KEY_H_RELEASED,
+    [0x17] = KEY_I_PRESSED, [0x97] = KEY_I_RELEASED,
+    [0x24] = KEY_J_PRESSED, [0xA4] = KEY_J_RELEASED,
+    [0x25] = KEY_K_PRESSED, [0xA5] = KEY_K_RELEASED,
+    [0x26] = KEY_L_PRESSED, [0xA6] = KEY_L_RELEASED,
+    [0x32] = KEY_M_PRESSED, [0xB2] = KEY_M_RELEASED,
+    [0x31] = KEY_N_PRESSED, [0xB1] = KEY_N_RELEASED,
+    [0x18] = KEY_O_PRESSED, [0x98] = KEY_O_RELEASED,
+    [0x19] = KEY_P_PRESSED, [0x99] = KEY_P_RELEASED,
+    [0x10] = KEY_Q_PRESSED, [0x90] = KEY_Q_RELEASED,
+    [0x13] = KEY_R_PRESSED, [0x93] = KEY_R_RELEASED,
+    [0x1F] = KEY_S_PRESSED, [0x9F] = KEY_S_RELEASED,
+    [0x14] = KEY_T_PRESSED, [0x94] = KEY_T_RELEASED,
+    [0x16] = KEY_U_PRESSED, [0x96] = KEY_U_RELEASED,
+    [0x2F] = KEY_V_PRESSED, [0xAF] = KEY_V_RELEASED,
+    [0x11] = KEY_W_PRESSED, [0x91] = KEY_W_RELEASED,
+    [0x2D] = KEY_X_PRESSED, [0xAD] = KEY_X_RELEASED,
+    [0x15] = KEY_Y_PRESSED, [0x95] = KEY_Y_RELEASED,
+    [0x2C] = KEY_Z_PRESSED, [0xAC] = KEY_Z_RELEASED,
 
-// Modofiers
-#define SC_LSHIFT_PRESS   0x2A
-#define SC_LSHIFT_RELEASE 0xAA
-#define SC_RSHIFT_PRESS   0x36
-#define SC_RSHIFT_RELEASE 0xB6
-#define SC_LCTRL_PRESS    0x1D
-#define SC_LALT_PRESS     0x38
+    // SPACE
+    [0x39] = KEY_SPACE_PRESSED, [0xB9] = KEY_SPACE_RELEASED,
 
-// Locks
-#define SC_CAPSLOCK       0x3A
-#define SC_NUMLOCK        0x45
-#define SC_SCROLLLOCK     0x46
+    // symbols
+    [0x29] = KEY_GRAVE_PRESSED, [0xA9] = KEY_GRAVE_RELEASED,
+    [0x0C] = KEY_MINUS_PRESSED, [0x8C] = KEY_MINUS_RELEASED,
+    [0x0D] = KEY_EQUALS_PRESSED, [0x8D] = KEY_EQUALS_RELEASED,
+    [0x1A] = KEY_LBRACKET_PRESSED, [0x9A] = KEY_LBRACKET_RELEASED,
+    [0x1B] = KEY_RBRACKET_PRESSED, [0x9B] = KEY_RBRACKET_RELEASED,
+    [0x2B] = KEY_BACKSLASH_PRESSED, [0xAB] = KEY_BACKSLASH_RELEASED,
+    [0x27] = KEY_SEMICOLON_PRESSED, [0xA7] = KEY_SEMICOLON_RELEASED,
+    [0x28] = KEY_APOSTROPHE_PRESSED, [0xA8] = KEY_APOSTROPHE_RELEASED,
+    [0x33] = KEY_COMMA_PRESSED, [0xB3] = KEY_COMMA_RELEASED,
+    [0x34] = KEY_DOT_PRESSED, [0xB4] = KEY_DOT_RELEASED,
+    [0x35] = KEY_SLASH_PRESSED, [0xB5] = KEY_SLASH_RELEASED,
 
-// Special keys
-#define SC_ESC            0x01
-#define SC_TAB            0x0F
-#define SC_ENTER          0x1C
-#define SC_BACKSPACE      0x0E
+    // control
+    [0x01] = KEY_ESCAPE_PRESSED, [0x81] = KEY_ESCAPE_RELEASED,
+    [0x0F] = KEY_TAB_PRESSED, [0x8F] = KEY_TAB_RELEASED,
+    [0x0E] = KEY_BACKSPACE_PRESSED, [0x8E] = KEY_BACKSPACE_RELEASED,
+    [0x1C] = KEY_ENTER_PRESSED, [0x9C] = KEY_ENTER_RELEASED,
 
-// Function keys
-#define SC_F1             0x3B
-#define SC_F2             0x3C
-#define SC_F3             0x3D
-#define SC_F4             0x3E
-#define SC_F5             0x3F
-#define SC_F6             0x40
-#define SC_F7             0x41
-#define SC_F8             0x42
-#define SC_F9             0x43
-#define SC_F10            0x44
-#define SC_F11            0x57
-#define SC_F12            0x58
+    //modifiers
+    [0x2A] = KEY_LSHIFT_PRESSED, [0xAA] = KEY_LSHIFT_RELEASED,
+    [0x36] = KEY_RSHIFT_PRESSED, [0xB6] = KEY_RSHIFT_RELEASED,
+    [0x1D] = KEY_LCTRL_PRESSED, [0x9D] = KEY_LCTRL_RELEASED,
+    [0x38] = KEY_LALT_PRESSED, [0xB8] = KEY_LALT_RELEASED,
 
-// Numpad
-#define SC_NUMPAD_7       0x47
-#define SC_NUMPAD_8       0x48
-#define SC_NUMPAD_9       0x49
-#define SC_NUMPAD_MINUS   0x4A
-#define SC_NUMPAD_4       0x4B
-#define SC_NUMPAD_5       0x4C
-#define SC_NUMPAD_6       0x4D
-#define SC_NUMPAD_PLUS    0x4E
-#define SC_NUMPAD_1       0x4F
-#define SC_NUMPAD_2       0x50
-#define SC_NUMPAD_3       0x51
-#define SC_NUMPAD_0       0x52
-#define SC_NUMPAD_DOT     0x53
-#define SC_NUMPAD_STAR    0x37
+    // locks
+    [0x3A] = KEY_CAPSLOCK_PRESSED, [0xBA] = KEY_CAPSLOCK_RELEASED,
+    [0x45] = KEY_NUMLOCK_PRESSED, [0xC5] = KEY_NUMLOCK_RELEASED,
+    [0x46] = KEY_SCROLLLOCK_PRESSED, [0xC6] = KEY_SCROLLLOCK_RELEASED,
 
-// Extended prefix
-#define SC_EXTENDED       0xE0
+    // numpad
+    [0x4F] = KEY_NP_1_PRESSED, [0xCF] = KEY_NP_1_RELEASED,
+    [0x50] = KEY_NP_2_PRESSED, [0xD0] = KEY_NP_2_RELEASED,
+    [0x51] = KEY_NP_3_PRESSED, [0xD1] = KEY_NP_3_RELEASED,
+    [0x4B] = KEY_NP_4_PRESSED, [0xCB] = KEY_NP_4_RELEASED,
+    [0x4C] = KEY_NP_5_PRESSED, [0xCC] = KEY_NP_5_RELEASED,
+    [0x4D] = KEY_NP_6_PRESSED, [0xCD] = KEY_NP_6_RELEASED,
+    [0x47] = KEY_NP_7_PRESSED, [0xC7] = KEY_NP_7_RELEASED,
+    [0x48] = KEY_NP_8_PRESSED, [0xC8] = KEY_NP_8_RELEASED,
+    [0x49] = KEY_NP_9_PRESSED, [0xC9] = KEY_NP_9_RELEASED,
+    [0x52] = KEY_NP_0_PRESSED, [0xD2] = KEY_NP_0_RELEASED,
+
+    [0x53] = KEY_NP_DOT_PRESSED, [0xD3] = KEY_NP_DOT_RELEASED,
+    [0x37] = KEY_NP_STAR_PRESSED, [0xB7] = KEY_NP_STAR_RELEASED,
+    [0x4A] = KEY_NP_MINUS_PRESSED, [0xCA] = KEY_NP_MINUS_RELEASED,
+    [0x4E] = KEY_NP_PLUS_PRESSED, [0xCE] = KEY_NP_PLUS_RELEASED,
+
+    // function keys
+    [0x3B] = KEY_F1_PRESSED, [0xBB] = KEY_F1_RELEASED,
+    [0x3C] = KEY_F2_PRESSED, [0xBC] = KEY_F2_RELEASED,
+    [0x3D] = KEY_F3_PRESSED, [0xBD] = KEY_F3_RELEASED,
+    [0x3E] = KEY_F4_PRESSED, [0xBE] = KEY_F4_RELEASED,
+    [0x3F] = KEY_F5_PRESSED, [0xBF] = KEY_F5_RELEASED,
+    [0x40] = KEY_F6_PRESSED, [0xC0] = KEY_F6_RELEASED,
+    [0x41] = KEY_F7_PRESSED, [0xC1] = KEY_F7_RELEASED,
+    [0x42] = KEY_F8_PRESSED, [0xC2] = KEY_F8_RELEASED,
+    [0x43] = KEY_F9_PRESSED, [0xC3] = KEY_F9_RELEASED,
+    [0x44] = KEY_F10_PRESSED, [0xC4] = KEY_F10_RELEASED,
+    [0x57] = KEY_F11_PRESSED, [0xD7] = KEY_F11_RELEASED,
+    [0x58] = KEY_F12_PRESSED, [0xD8] = KEY_F12_RELEASED,
+};
+
+unsigned char keycode_map_extended[256] = {
+    // control
+    [0x52] = KEY_INSERT_PRESSED, [0xD2] = KEY_INSERT_RELEASED,
+    [0x53] = KEY_DELETE_PRESSED, [0xD3] = KEY_DELETE_RELEASED,
+
+    // modifiers
+    [0x1D] = KEY_RCTRL_PRESSED, [0x9D] = KEY_RCTRL_RELEASED,
+    [0x38] = KEY_RALT_PRESSED, [0xB8] = KEY_RALT_RELEASED,
+
+    // navigation
+    [0x48] = KEY_UP_PRESSED, [0xC8] = KEY_UP_RELEASED,
+    [0x50] = KEY_DOWN_PRESSED, [0xD0] = KEY_DOWN_RELEASED,
+    [0x4B] = KEY_LEFT_PRESSED, [0xCB] = KEY_LEFT_RELEASED,
+    [0x4D] = KEY_RIGHT_PRESSED, [0xCD] = KEY_RIGHT_RELEASED,
+    [0x47] = KEY_HOME_PRESSED, [0xC7] = KEY_HOME_RELEASED,
+    [0x4F] = KEY_END_PRESSED, [0xCF] = KEY_END_RELEASED,
+    [0x49] = KEY_PAGE_UP_PRESSED, [0xC9] = KEY_PAGE_UP_RELEASED,
+    [0x51] = KEY_PAGE_DOWN_PRESSED, [0xD1] = KEY_PAGE_DOWN_RELEASED,
+
+    // numpad
+    [0x35] = KEY_NP_SLASH_PRESSED, [0xB5] = KEY_NP_SLASH_RELEASED,
+    [0x1C] = KEY_NP_ENTER_PRESSED, [0x9C] = KEY_NP_ENTER_RELEASED,
+
+    // misc
+    [0x5B] = KEY_LGUI_PRESSED, [0xDB] = KEY_LGUI_RELEASED,
+    [0x5C] = KEY_RGUI_PRESSED, [0xDC] = KEY_RGUI_RELEASED,
+    [0x5D] = KEY_APPS_PRESSED, [0xDD] = KEY_APPS_RELEASED,
+
+    [0x10] = KEY_PREV_TRACK_PRESSED, [0x90] = KEY_PREV_TRACK_RELEASED,
+    [0x19] = KEY_NEXT_TRACK_PRESSED, [0x99] = KEY_NEXT_TRACK_RELEASED,
+    [0x22] = KEY_PLAY_PRESSED, [0xA2] = KEY_PLAY_RELEASED,
+    [0x24] = KEY_STOP_PRESSED, [0xA4] = KEY_STOP_RELEASED,
+    [0x20] = KEY_MUTE_PRESSED, [0xA0] = KEY_MUTE_RELEASED,
+    [0x2E] = KEY_VOL_DOWN_PRESSED, [0xAE] = KEY_VOL_DOWN_RELEASED,
+    [0x30] = KEY_VOL_UP_PRESSED, [0xB0] = KEY_VOL_UP_RELEASED,
+    [0x6D] = KEY_MEDIA_SELECT_PRESSED, [0xED] = KEY_MEDIA_SELECT_RELEASED,
+    [0x21] = KEY_CALCULATOR_PRESSED, [0xA1] = KEY_CALCULATOR_RELEASED,
+    [0x6B] = KEY_MY_COMPUTER_PRESSED, [0xEB] = KEY_MY_COMPUTER_RELEASED,
+    [0x6C] = KEY_EMAIL_PRESSED, [0xEC] = KEY_EMAIL_RELEASED,
+
+    [0x32] = KEY_WWW_HOME_PRESSED, [0xB2] = KEY_WWW_HOME_RELEASED,
+    [0x65] = KEY_WWW_SEARCH_PRESSED, [0xE5] = KEY_WWW_SEARCH_RELEASED,
+    [0x66] = KEY_WWW_FAVORITES_PRESSED, [0xE6] = KEY_WWW_FAVORITES_RELEASED,
+    [0x67] = KEY_WWW_REFRESH_PRESSED, [0xE7] = KEY_WWW_REFRESH_RELEASED,
+    [0x68] = KEY_WWW_STOP_PRESSED, [0xE8] = KEY_WWW_STOP_RELEASED,
+    [0x69] = KEY_WWW_FORWARD_PRESSED, [0xE9] = KEY_WWW_FORWARD_RELEASED,
+    [0x6A] = KEY_WWW_BACK_PRESSED, [0xEA] = KEY_WWW_BACK_RELEASED,
+
+    [0x5E] = KEY_ACPI_POWER_PRESSED, [0xDE] = KEY_ACPI_POWER_RELEASED,
+    [0x5F] = KEY_ACPI_SLEEP_PRESSED, [0xDF] = KEY_ACPI_SLEEP_RELEASED,
+    [0x63] = KEY_ACPI_WAKE_PRESSED, [0xE3] = KEY_ACPI_WAKE_RELEASED,
+};
 
 #endif

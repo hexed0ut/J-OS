@@ -1,97 +1,66 @@
 #ifndef DRIVER_H
 #define DRIVER_H
 
-#include "keymap.h"
-#include "state.c"
 #include "scan_code_set_1.h"
-
-char shift_map[128] = {
-    ['1'] = '!', ['2']  = '@', ['3'] = '#', ['4'] = '$', ['5']  = '%',
-    ['6'] = '^', ['7']  = '&', ['8'] = '*', ['9'] = '(', ['0']  = ')',
-
-    ['-'] = '_', ['=']  = '+', ['['] = '{', [']'] = '}', ['\\'] = '|',
-    [';'] = ':', ['\''] = '"', [','] = '<', ['.'] = '>', ['/']  = '?', ['`'] = '~',
-};
+#include "os_keycode.h"
+#include "global.h"
 
 unsigned char is_keypress()
 {
-    return (inb( 0x64 ) & 1);
+    return inb( 0x64 ) & 1;
 }
 
-char resolve_caps( unsigned char key )
+void update_global_modifier_state( enum keycode key_event )
 {
-    if ( key > 96 && key < 123 )
+    switch ( key_event )
     {
-        return key - 32;
-    }
-    else
-    {
-        return key;
+    case KEY_LSHIFT_PRESSED: case KEY_RSHIFT_PRESSED:
+        SHIFT_ACTIVE = 1;
+        break;
+
+    case KEY_LSHIFT_RELEASED: case KEY_RSHIFT_RELEASED:
+        SHIFT_ACTIVE = 0;
+        break;
+
+    case KEY_LCTRL_PRESSED: case KEY_RCTRL_PRESSED:
+        CTRL_ACTIVE = 1;
+        break;
+
+    case KEY_LCTRL_RELEASED: case KEY_RCTRL_RELEASED:
+        CTRL_ACTIVE = 0;
+        break;
+
+    case KEY_CAPSLOCK_PRESSED:
+        CAPSLOCK_ACTIVE = !CAPSLOCK_ACTIVE;
+        break;
+
+    case KEY_NUMLOCK_PRESSED:
+        NUMLOCK_ACTIVE = !NUMLOCK_ACTIVE;
+        break;
     }
 }
 
-char resolve_shift( unsigned char key )
+enum keycode await_ps2_key_event( unsigned char* source_map )
 {
-    if ( key > 96 && key < 123 )
+    if ( source_map == 0 )
     {
-        return resolve_caps( key );
-    }
-    else
-    {
-        return shift_map[key];
-    }
-}
+        source_map = (unsigned char*)&keycode_map;
 
-char resolve_ps2_key( unsigned char scan_code )
-{
+        while ( 1 )
+        {
+            if ( is_keypress() )
+            {
+                unsigned char scan_code = inb( 0x60 );
 
-    if ( ps2_us_qwerty[scan_code].type == PRINTABLE )
-    {
-        if ( SHIFT_ACTIVE )
-        {
-            return resolve_shift( ps2_us_qwerty[scan_code].key );
-        }
-        else if ( CAPSLOCK_ACTIVE )
-        {
-            return resolve_caps( ps2_us_qwerty[scan_code].key );
-        }
-        else
-        {
-            return ps2_us_qwerty[scan_code].key;
-        }
-    }
-
-    else if ( ps2_us_qwerty[scan_code].type == MODIFIER )
-    {
-        if ( scan_code == SC_LSHIFT_PRESS || scan_code == SC_RSHIFT_PRESS )
-        {
-            SHIFT_ACTIVE = 1;
-        }
-        else if ( scan_code == SC_LSHIFT_RELEASE || scan_code == SC_RSHIFT_RELEASE )
-        {
-            SHIFT_ACTIVE = 0;
-        }
-    }
-
-    else if ( ps2_us_qwerty[scan_code].type == LOCK )
-    {
-        if ( scan_code == SC_CAPSLOCK )
-        {
-            CAPSLOCK_ACTIVE = !CAPSLOCK_ACTIVE;
-        }
-    }
-
-    return 0;
-}
-
-char await_ps2_key()
-{
-    while ( 1 )
-    {
-        if ( is_keypress() )
-        {
-            unsigned char scan_code = inb( 0x60 );
-            return resolve_ps2_key( scan_code );
+                if ( scan_code != SC_EXTENDED )
+                {
+                    enum keycode key_event = source_map[scan_code];
+                    update_global_modifier_state( key_event );
+                    return key_event;
+                }
+                else
+                    await_ps2_key_event( (unsigned char*)&keycode_map_extended );
+            }
         }
     }
 }
