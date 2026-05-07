@@ -1,5 +1,4 @@
-#ifndef DRIVER_H
-#define DRIVER_H
+#pragma once
 
 #include "scan_code_set_1.h"
 #include "os_keycode.h"
@@ -64,5 +63,3 @@ enum keycode await_ps2_key_event( unsigned char* source_map )
         }
     }
 }
-
-#endif

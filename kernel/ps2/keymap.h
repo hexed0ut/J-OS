@@ -1,5 +1,4 @@
-#ifndef KEYMAP_H
-#define KEYMAP_H
+#pragma once
 
 #define NO_DISPLAY 0
 
@@ -99,5 +98,3 @@ char shift_map[128] = {
     [';'] = ':',  [','] = '<',  ['.'] = '>',  ['/'] = '?',  ['`'] = '~',
     ['\''] = '"', ['\\'] = '|',
 };
-
-#endif

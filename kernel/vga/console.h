@@ -1,5 +1,4 @@
-#ifndef CONSOLE_H
-#define CONSOLE_H
+#pragma once
 
 #include "cursor.h"
 #include "global.h"
@@ -20,5 +19,3 @@ void clear_screen()
     clear_vga_buffer();
     reset_cursor();
 }
-
-#endif

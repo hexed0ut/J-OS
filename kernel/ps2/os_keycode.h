@@ -1,5 +1,4 @@
-#ifndef OS_KEYCODE_H
-#define OS_KEYCODE_H
+#pragma once
 
 enum keycode
 {
@@ -153,5 +152,3 @@ enum keycode
   KEY_ACPI_WAKE_PRESSED, KEY_ACPI_WAKE_RELEASED,
 
 };
-
-#endif

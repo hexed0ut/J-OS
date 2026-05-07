@@ -1,5 +1,4 @@
-#ifndef SCAN_CODE_SET_1_H
-#define SCAN_CODE_SET_1_H
+#pragma once
 
 #include "os_keycode.h"
 
@@ -163,5 +162,3 @@ unsigned char keycode_map_extended[256] = {
     [0x5F] = KEY_ACPI_SLEEP_PRESSED, [0xDF] = KEY_ACPI_SLEEP_RELEASED,
     [0x63] = KEY_ACPI_WAKE_PRESSED, [0xE3] = KEY_ACPI_WAKE_RELEASED,
 };
-
-#endif

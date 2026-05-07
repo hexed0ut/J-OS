@@ -1,5 +1,4 @@
-#ifndef CHARACTER_H
-#define CHARACTER_H
+#pragma once
 
 #include <stdbool.h>
 
@@ -20,5 +19,3 @@ char to_uppercase( char ch )
 
 	return ch;
 }
-
-#endif

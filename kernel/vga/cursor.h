@@ -1,5 +1,4 @@
-#ifndef CURSOR_H
-#define CURSOR_H
+#pragma once
 
 #include "asm_utils.h"
 #include "global.h"
@@ -66,5 +65,3 @@ void shift_cursor( int delta )
         outb( 0x3D5, lsb );
     }
 }
-
-#endif

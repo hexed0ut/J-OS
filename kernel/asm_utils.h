@@ -1,5 +1,4 @@
-#ifndef ASM_UTILS_H
-#define ASM_UTILS_H
+#pragma once
 
 void outb( int port, char value )
 {
@@ -12,5 +11,3 @@ unsigned char inb( int port )
     asm volatile ("inb %1, %0" : "=a"(ret) : "Nd"(port));
     return ret;
 }
-
-#endif

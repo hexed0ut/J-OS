@@ -1,5 +1,4 @@
-#ifndef IOSTREAM_H
-#define IOSTREAM_H
+#pragma once
 
 #include "ps2/driver.h"
 #include "vga/cursor.h"
@@ -50,5 +49,3 @@ void read_input()
 }
 
 void read_key_event() { return; }
-
-#endif
