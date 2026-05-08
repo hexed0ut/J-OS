@@ -1,7 +1,7 @@
 #pragma once
 
 #include "scan_code_set_1.h"
-#include "os_keycode.h"
+#include "keycode.h"
 #include "global.h"
 
 unsigned char is_keypress()
