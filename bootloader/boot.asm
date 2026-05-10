@@ -48,7 +48,7 @@ load_kernel_sectors:
     mov dl, 0x80         ; BOOT DRIVE
 
     ; define copy size (of kernel)
-    mov al, 10           ; 10 sectors = 10 * 512 bytes 
+    mov al, 100          ; 10 sectors = 10 * 512 bytes 
 
     ; do BIOS read from disk
     int 0x13
