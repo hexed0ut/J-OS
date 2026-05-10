@@ -14,4 +14,4 @@ i686-elf-ld --oformat=binary -T $KERNEL_PATH/linker.ld $BUILD_PATH/kernel_asm.o 
 
 dd if=$BUILD_PATH/boot.bin of=$BUILD_PATH/bare_os.img count=1 bs=512 conv=notrunc
 
-dd if=$BUILD_PATH/kernel.bin of=$BUILD_PATH/bare_os.img count=10 bs=512 seek=1 conv=notrunc
+dd if=$BUILD_PATH/kernel.bin of=$BUILD_PATH/bare_os.img count=20 bs=512 seek=1 conv=notrunc

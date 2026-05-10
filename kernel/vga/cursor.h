@@ -47,13 +47,14 @@ void shift_cursor( int delta )
 {
     outb( 0x3D4, 0x0F );
     unsigned char lsb = inb( 0x3D5 );
-    if ( lsb + delta < 256 )
+    if ( 0 <= lsb + delta && lsb + delta <= 255 )
     {
         lsb += delta;
         outb( 0x3D5, lsb );
     }
     else
     {
+		// TODO: handle cursor going to negative pos and >2000 pos
         outb( 0x3D4, 0x0E );
         unsigned char hsb = inb( 0x3D5 );
         int pos = hsb * 256 + lsb;

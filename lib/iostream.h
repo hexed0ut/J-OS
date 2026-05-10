@@ -16,7 +16,7 @@ char resolve_shift( unsigned char ch )
 	return shift_map[ch];
 }
 
-char resolve_keycode( unsigned char keycode )
+char resolve_keycode_ascii( unsigned char keycode )
 {
 	struct KeyMapValue val = keycode_ascii[keycode];
 
@@ -39,20 +39,25 @@ char resolve_keycode( unsigned char keycode )
 	return 0;
 }
 
-void read_input()
-{
-	char* vga = (char*)VGA_BUFFER_START;
-	int pos = 0;
-	while ( 1 )
-	{
-		enum keycode key = await_ps2_key_event( 0 );
-		char ch = resolve_keycode( key );
-		if ( !ch ) continue;
+// char resolve_keycode_type( unsigned char keycode )
+// {
+// 	return keycode_ascii[keycode].type;
+// }
 
-		*(vga + pos) = ch;
-		pos = pos + 2;
-		shift_cursor( 1 );
-	}
-}
+// void stream_ps2_to_vga()
+// {
+// 	char* vga = (char*)VGA_BUFFER_START;
+// 	int pos = 0;
+// 	while ( 1 )
+// 	{
+// 		enum keycode key = await_ps2_key_event( 0 );
+// 		char ch = resolve_keycode_ascii( key );
+// 		if ( !ch ) continue;
 
-void read_key_event() { return; }
+// 		*(vga + pos) = ch;
+// 		pos = pos + 2;
+// 		shift_cursor( 1 );
+// 	}
+// }
+
+// void read_key_event() { return; }
