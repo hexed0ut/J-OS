@@ -36,6 +36,10 @@ void update_global_modifier_state( enum keycode key_event )
     case KEY_NUMLOCK_PRESSED:
         NUMLOCK_ACTIVE = !NUMLOCK_ACTIVE;
         break;
+
+	case KEY_INSERT_PRESSED:
+		OVERWRITE_ACTIVE = !OVERWRITE_ACTIVE;
+		break;
     }
 }
 

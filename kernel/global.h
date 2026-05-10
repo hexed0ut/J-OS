@@ -10,3 +10,6 @@ int SHIFT_ACTIVE = 0;
 int CAPSLOCK_ACTIVE = 0;
 int NUMLOCK_ACTIVE = 0;
 int CTRL_ACTIVE = 0;
+
+// character insert mode
+int OVERWRITE_ACTIVE = 0;

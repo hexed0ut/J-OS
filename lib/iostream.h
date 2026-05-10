@@ -4,6 +4,8 @@
 #include "vga/cursor.h"
 #include "ps2/keymap.h"
 #include "character.h"
+#include "iobuff.h"
+#include "memory.h"
 
 char resolve_shift( unsigned char ch )
 {
@@ -16,7 +18,7 @@ char resolve_shift( unsigned char ch )
 	return shift_map[ch];
 }
 
-char resolve_keycode( unsigned char keycode )
+char resolve_keycode_to_ascii( unsigned char keycode )
 {
 	struct KeyMapValue val = keycode_ascii[keycode];
 
@@ -39,6 +41,11 @@ char resolve_keycode( unsigned char keycode )
 	return 0;
 }
 
+char resolve_keycode_to_type( unsigned char keycode )
+{
+	return keycode_ascii[keycode].type;
+}
+
 void read_input()
 {
 	char* vga = (char*)VGA_BUFFER_START;
@@ -46,13 +53,33 @@ void read_input()
 	while ( 1 )
 	{
 		enum keycode key = await_ps2_key_event( 0 );
-		char ch = resolve_keycode( key );
+		char ch = resolve_keycode_to_ascii( key );
 		if ( !ch ) continue;
 
 		*(vga + pos) = ch;
 		pos = pos + 2;
 		shift_cursor( 1 );
 	}
+}
+
+void std_input( char* str )
+{
+	long length = strlen( std_input_buffer );
+	memcpy( std_input_buffer, str, length );
+	flush_std_input_buffer();
+}
+
+void std_output( char* str )
+{
+	memcpy( str, std_output_buffer, strlen( str ) );
+	strcat( std_output_buffer, '\n' );
+	flush_std_output_buffer();
+}
+
+void std_output( char* str, char end )
+{
+	memcpy( str, std_output_buffer, strlen( str ) );
+	strcat( std_output_buffer, end );
 }
 
 void read_key_event() { return; }

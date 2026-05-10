@@ -65,3 +65,4 @@ void shift_cursor( int delta )
         outb( 0x3D5, lsb );
     }
 }
+
